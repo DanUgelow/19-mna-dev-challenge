@@ -27,11 +27,31 @@
       (function() {
         var imgElement = document.createElement("img");
         var imagesData = profiles.profile;
+        // console.log(imagesData);
 
         Object.keys(profiles.profile).map(function(key) {
-          // set images here
+          //   return console.log(imagesData[key]);
+
+          document.getElementById("images-grid").appendChild(imgElement);
+          imgElement.src = imagesData[key].img;
         });
-        // menu nav functionality (TBD)
+
+        // for (var i = 0; i < profiles.length; )
+        // var jsonImages = require("./examples/json-variable.json");
+        // var mobileNav = document.querySelector("#nav--mobile");
+        // var mobileMenu = document.querySelector("#nav--mobile-menu");
+        // var mobileMenuClose = document.querySelector("#nav--mobile-menu-close");
+
+        // function toggleMobileNav() {
+        //   if (mobileMenu.classList.contains("nav--mobile-menu-visible")) {
+        //     mobileMenu.classList.remove("nav--mobile-menu-visible");
+        //   } else {
+        //     mobileMenu.classList.add("nav--mobile-menu-visible");
+        //   }
+        // }
+
+        // mobileNav.addEventListener("click", toggleMobileNav);
+        // mobileMenuClose.addEventListener("click", toggleMobileNav);
       })();
     </script>
   </body>
