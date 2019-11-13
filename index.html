@@ -12,46 +12,84 @@
   </head>
   <body>
     <div class="container">
+      <nav>
+        <!-- <div class="menu-container" id="menu-container"> -->
+        <img id="hamburger" class="hamburger" src="images/hambacon-icon.png" />
+        <!-- </div> -->
+        <div id="menu" class="menu"></div>
+      </nav>
       <header class="header">
-        <div class="hambuger" id="hamburger">
-          <img src="examples/hambacon-icon.png" />
-        </div>
         <img class="logo" src="images/icon.png" />
         <h1>The Great Pattern Challenge</h1>
       </header>
 
-      <div id="images-grid"></div>
+      <div id="card-grid" class="card-grid"></div>
     </div>
     <script type="text/javascript" src="examples/json-variable.js"></script>
     <script>
       (function() {
-        var imgElement = document.createElement("img");
         var imagesData = profiles.profile;
-        // console.log(imagesData);
+        var textNode;
+        var divElement;
+        var textElement;
+        var fragment;
 
-        Object.keys(profiles.profile).map(function(key) {
-          //   return console.log(imagesData[key]);
+        createCards();
+        createNav();
+        initializeNav();
 
-          document.getElementById("images-grid").appendChild(imgElement);
-          imgElement.src = imagesData[key].img;
-        });
+        function createCards() {
+          var cardGrid = document.getElementById("card-grid");
+          fragment = new DocumentFragment();
 
-        // for (var i = 0; i < profiles.length; )
-        // var jsonImages = require("./examples/json-variable.json");
-        // var mobileNav = document.querySelector("#nav--mobile");
-        // var mobileMenu = document.querySelector("#nav--mobile-menu");
-        // var mobileMenuClose = document.querySelector("#nav--mobile-menu-close");
+          Object.keys(profiles.profile).map(function(key) {
+            // creating our main container with the bg image
+            divElement = document.createElement("div");
+            fragment.appendChild(divElement);
+            divElement.classList.add("card");
+            divElement.style.backgroundImage = `url(${imagesData[key].img})`;
 
-        // function toggleMobileNav() {
-        //   if (mobileMenu.classList.contains("nav--mobile-menu-visible")) {
-        //     mobileMenu.classList.remove("nav--mobile-menu-visible");
-        //   } else {
-        //     mobileMenu.classList.add("nav--mobile-menu-visible");
-        //   }
-        // }
+            // adding the text
+            textElement = document.createElement("div");
+            textElement.classList.add("card-text");
+            textNode = document.createTextNode(imagesData[key].name);
+            textElement.appendChild(textNode);
+            divElement.appendChild(textElement);
+          });
 
-        // mobileNav.addEventListener("click", toggleMobileNav);
-        // mobileMenuClose.addEventListener("click", toggleMobileNav);
+          cardGrid.appendChild(fragment);
+        }
+
+        // although this is repeating the code above, would refactor if not for example so it would be DRY
+        function createNav() {
+          var menu = document.getElementById("menu");
+          fragment = new DocumentFragment();
+
+          Object.keys(profiles.profile).map(function(key) {
+            var aElement = document.createElement("a");
+
+            textNode = document.createTextNode(`Link ${key}`);
+            aElement.appendChild(textNode);
+            fragment.appendChild(aElement);
+          });
+
+          menu.appendChild(fragment);
+        }
+
+        function initializeNav() {
+          var navIcon = document.getElementById("hamburger");
+          var menu = document.getElementById("menu");
+
+          function toggleNav() {
+            if (!menu.classList.contains("menu--visible")) {
+              menu.classList.add("menu--visible");
+            } else {
+              menu.classList.remove("menu--visible");
+            }
+          }
+
+          navIcon.addEventListener("click", toggleNav);
+        }
       })();
     </script>
   </body>

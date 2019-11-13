@@ -1,7 +1,40 @@
-/* vendor prefixes needed for flex and transforms */
-/* usually mobile first.. hence 320 media brkpt */
+/* vendor prefixes not included - yay for autprefixer*/
+/* would also aphabetize everything in a real scenario and use BEM  */
+
 .container {
   padding: 20px;
+}
+
+/* .menu-container {
+  position: absolute;
+  left: 0;
+} */
+
+.hamburger {
+  width: 30px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+}
+
+.menu {
+  transform: translate(-100%);
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  transition: transform 0.3s ease;
+  width: 200px;
+  background-color: #add8e6;
+  top: 0;
+  left: 0;
+  padding: 60px 0px 30px 30px;
+  z-index: 5;
+}
+
+.menu a {
+  padding: 20px 0;
 }
 
 .header {
@@ -12,9 +45,43 @@
   width: 100px;
 }
 
-.hamburger {
+.card-grid {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-/* @media only screen and (min-width: 320px) {
+.card {
+  margin: 20px;
+  display: flex;
+  flex-shrink: 0;
+  background-size: contain;
+  border: 1px solid #f1f1f1;
+  border-radius: 10px;
+  width: 300px;
+  height: 300px;
+  position: relative;
+}
 
-} */
+.card-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f1f1;
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.menu--visible {
+  transform: translateX(0);
+}
+
+@media only screen and (max-width: 414px) {
+  .card {
+    width: 100%;
+  }
+}
